@@ -4,6 +4,7 @@ import { useState } from 'react'
 
 export default function Home() {
   const [screen, setScreen] = useState('manifesto')
+  const [decision, setDecision] = useState('')
 
   return (
     <main style={{
@@ -25,6 +26,9 @@ export default function Home() {
           <p style={{ fontSize: '22px', lineHeight: '1.6', marginBottom: '48px', color: '#aaa' }}>
             Он показывает то, что ты делаешь.
           </p>
+          <p style={{ fontSize: '16px', color: '#666', marginBottom: '48px' }}>
+            Если это то, что ты ищешь — продолжим.
+          </p>
           <button
             onClick={() => setScreen('register')}
             style={{
@@ -42,8 +46,11 @@ export default function Home() {
 
       {screen === 'register' && (
         <div style={{ width: '100%', textAlign: 'center' }}>
-          <p style={{ fontSize: '18px', marginBottom: '32px', color: '#aaa' }}>
+          <p style={{ fontSize: '18px', marginBottom: '24px', color: '#aaa' }}>
             14 дней — это минимум чтобы увидеть реальную картину.
+          </p>
+          <p style={{ fontSize: '16px', marginBottom: '48px', color: '#666' }}>
+            До этого — просто отвечай на вопросы. Каждый день одно решение. Это займёт 60 секунд.
           </p>
           <button
             onClick={() => setScreen('morning')}
@@ -62,14 +69,21 @@ export default function Home() {
 
       {screen === 'morning' && (
         <div style={{ width: '100%' }}>
-          <p style={{ fontSize: '14px', color: '#666', marginBottom: '32px' }}>
+          <p style={{ fontSize: '14px', color: '#666', marginBottom: '8px' }}>
             День 1 из 14
           </p>
-          <p style={{ fontSize: '20px', lineHeight: '1.6', marginBottom: '32px' }}>
+          <p style={{ fontSize: '20px', lineHeight: '1.6', marginBottom: '12px' }}>
             Какое решение или выбор тебя ждёт сегодня?
           </p>
+          <p style={{ fontSize: '14px', color: '#555', marginBottom: '20px' }}>
+            Любое — позвонить кому-то, что приготовить, 
+            куда пойти, как ответить, что купить, 
+            стоит ли соглашаться...
+          </p>
           <textarea
-            placeholder="Например: ответить на предложение о работе..."
+            value={decision}
+            onChange={(e) => setDecision(e.target.value)}
+            placeholder="Напиши своими словами..."
             style={{
               width: '100%',
               background: '#1a1a1a',
@@ -83,12 +97,14 @@ export default function Home() {
             }}
           />
           <button
-            onClick={() => setScreen('morning2')}
+            onClick={() => {
+              if (decision.trim()) setScreen('morning2')
+            }}
             style={{
               marginTop: '24px',
               width: '100%',
-              background: '#0D9488',
-              color: 'white',
+              background: decision.trim() ? '#0D9488' : '#333',
+              color: decision.trim() ? 'white' : '#666',
               border: 'none',
               padding: '16px',
               fontSize: '16px',
@@ -96,6 +112,70 @@ export default function Home() {
             }}>
             Далее
           </button>
+          {!decision.trim() && (
+            <p style={{ textAlign: 'center', fontSize: '13px', color: '#555', marginTop: '12px' }}>
+              Напиши хотя бы пару слов
+            </p>
+          )}
+        </div>
+      )}
+
+      {screen === 'morning2' && (
+        <div style={{ width: '100%' }}>
+          <p style={{ fontSize: '14px', color: '#666', marginBottom: '32px' }}>
+            День 1 из 14
+          </p>
+          <p style={{ fontSize: '20px', lineHeight: '1.6', marginBottom: '40px' }}>
+            Это решение возникло из внешней ситуации или ты сам его инициировал?
+          </p>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <button
+              onClick={() => setScreen('morning3')}
+              style={{
+                background: '#1a1a1a',
+                color: '#f0f0f0',
+                border: '1px solid #333',
+                padding: '16px',
+                fontSize: '16px',
+                borderRadius: '8px',
+                textAlign: 'left'
+              }}>
+              Внешняя ситуация
+              <span style={{ display: 'block', fontSize: '13px', color: '#555', marginTop: '4px' }}>
+                кто-то попросил, что-то случилось, дедлайн
+              </span>
+            </button>
+            <button
+              onClick={() => setScreen('morning3')}
+              style={{
+                background: '#1a1a1a',
+                color: '#f0f0f0',
+                border: '1px solid #333',
+                padding: '16px',
+                fontSize: '16px',
+                borderRadius: '8px',
+                textAlign: 'left'
+              }}>
+              Сам инициировал
+              <span style={{ display: 'block', fontSize: '13px', color: '#555', marginTop: '4px' }}>
+                я сам решил что это нужно сделать
+              </span>
+            </button>
+          </div>
+        </div>
+      )}
+
+      {screen === 'morning3' && (
+        <div style={{ width: '100%', textAlign: 'center' }}>
+          <p style={{ fontSize: '14px', color: '#666', marginBottom: '32px' }}>
+            День 1 из 14
+          </p>
+          <p style={{ fontSize: '20px', lineHeight: '1.6', marginBottom: '24px' }}>
+            Ответы записаны.
+          </p>
+          <p style={{ fontSize: '16px', color: '#666' }}>
+            Вернись вечером — один вопрос, 10 секунд.
+          </p>
         </div>
       )}
 
