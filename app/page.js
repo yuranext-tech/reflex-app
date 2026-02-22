@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { supabase } from '../lib/supabase'
 
 export default function Home() {
   const [screen, setScreen] = useState('manifesto')
@@ -26,9 +25,6 @@ export default function Home() {
           <p style={{ fontSize: '22px', lineHeight: '1.6', marginBottom: '48px', color: '#aaa' }}>
             Он показывает то, что ты делаешь.
           </p>
-          <p style={{ fontSize: '16px', color: '#666', marginBottom: '48px' }}>
-            Если это то, что ты ищешь — продолжим.
-          </p>
           <button
             onClick={() => setScreen('register')}
             style={{
@@ -48,9 +44,6 @@ export default function Home() {
         <div style={{ width: '100%', textAlign: 'center' }}>
           <p style={{ fontSize: '18px', marginBottom: '32px', color: '#aaa' }}>
             14 дней — это минимум чтобы увидеть реальную картину.
-          </p>
-          <p style={{ fontSize: '16px', marginBottom: '48px', color: '#666' }}>
-            До этого — просто отвечай на вопросы.
           </p>
           <button
             onClick={() => setScreen('morning')}
@@ -103,57 +96,6 @@ export default function Home() {
             }}>
             Далее
           </button>
-        </div>
-      )}
-
-      {screen === 'morning2' && (
-        <div style={{ width: '100%' }}>
-          <p style={{ fontSize: '14px', color: '#666', marginBottom: '32px' }}>
-            День 1 из 14
-          </p>
-          <p style={{ fontSize: '20px', lineHeight: '1.6', marginBottom: '40px' }}>
-            Это решение возникло из внешней ситуации или ты сам его инициировал?
-          </p>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            <button
-              onClick={() => setScreen('morning3')}
-              style={{
-                background: '#1a1a1a',
-                color: '#f0f0f0',
-                border: '1px solid #333',
-                padding: '16px',
-                fontSize: '16px',
-                borderRadius: '8px'
-              }}>
-              Внешняя ситуация
-            </button>
-            <button
-              onClick={() => setScreen('morning3')}
-              style={{
-                background: '#1a1a1a',
-                color: '#f0f0f0',
-                border: '1px solid #333',
-                padding: '16px',
-                fontSize: '16px',
-                borderRadius: '8px'
-              }}>
-              Сам инициировал
-            </button>
-          </div>
-        </div>
-      )}
-
-      {screen === 'morning3' && (
-        <div style={{ width: '100%', textAlign: 'center' }}>
-          <p style={{ fontSize: '14px', color: '#666', marginBottom: '32px' }}>
-            День 1 из 14
-          </p>
-          <p style={{ fontSize: '20px', lineHeight: '1.6', marginBottom: '48px' }}>
-            Ответы записаны.
-          </p>
-          <p style={{ fontSize: '16px', color: '#666' }}>
-            Вернись вечером — один вопрос, 10 секунд.
-          </p>
         </div>
       )}
 
